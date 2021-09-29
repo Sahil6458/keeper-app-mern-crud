@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import Zoom from "@mui/material/Zoom";
+import Fab from "@mui/material/Fab";
 function CreateArea(props) {
   const [note, setnote] = useState({
     title: "",
@@ -26,9 +29,12 @@ function CreateArea(props) {
       };
 
       if (props.update) {
-        let a = await axios.put(`http://localhost:8000/api/update/`, data);
-        console.log(a);
-        setnote(a.data);
+        await axios.put(`http://localhost:8000/api/update/`, data);
+        props.setSelectedNote({
+          id: null,
+          title: null,
+          content: null,
+        });
         props.setUpdate(false);
       } else {
         await axios.post("http://localhost:8000/api/addNew", note);
@@ -59,7 +65,8 @@ function CreateArea(props) {
       <form>
         <input
           name="title"
-          autocomplete="off"
+          autoFocus="on"
+          autoComplete="off"
           value={note.title}
           onChange={handleChange}
           placeholder="Title"
@@ -71,7 +78,12 @@ function CreateArea(props) {
           onChange={handleChange}
           rows="3"
         />
-        <button onClick={submitNote}>{props.update ? "Update" : "Add"}</button>
+
+        <Zoom in={true}>
+          <button onClick={submitNote}>
+            {props.update ? <NoteAltIcon /> : <NoteAddIcon />}
+          </button>
+        </Zoom>
       </form>
     </div>
   );
