@@ -1,5 +1,6 @@
 # keeper-app-mern-crud
-I added backend to the Angela-yu's Keeper app in The Complete Web Developement bootcamp 2021
+I added backend to the Angela-yu's Keeper app in The Complete Web Developement bootcamp 2021.
+User can now update notes also.
 
 Follow this steps :-
 1)Open FrontEnd Folder in vscode.
